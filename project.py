@@ -132,7 +132,7 @@ def deleteBadWordsToolsVersion(inputList, badList, outputList):
             
 
 while (prompt != "quit"):
-    prompt = str(input("Hi! If you would like to look up a recipe number, please type \"num\". If you would like to search for recipes by inputting tools, type \"tools\"\n"))
+    prompt = str(input("Hi! If you would like to look up a recipe number, please type \"num\". If you would like to search for recipes by inputting tools, type \"tools\". If you would like to look up the instructions for a recipe, type \"instructions\"\n"))
     if (prompt == "num"):
         finalToolsList = []
         
@@ -162,3 +162,11 @@ while (prompt != "quit"):
                     finalTitlesList.append(titlesList[i])
         
         print (list(dict.fromkeys(finalTitlesList)))
+
+    elif prompt == "instructions":
+        instructionsQuery = input("\nPlease input the name of the recipe you would like to search for\n").lower()
+        print (instructionsQuery)
+
+        for i in range(len(titlesList)):
+            if (instructionsQuery in titlesList[i].lower()):
+                print (instructionsList[i])
