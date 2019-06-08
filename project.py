@@ -136,19 +136,21 @@ while (prompt != "quit"):
     if (prompt == "num"):
         finalToolsList = []
         
-        numRecipe = int(input("Please enter the number of the recipe you would like to search. \"quit\" to exit.\n"))
+        numRecipe = int(input("Please enter the number of the recipe you would like to search (0-25322). \"quit\" to exit.\n"))
         toolsList = list(dict.fromkeys(findTools(numRecipe, instructionsWordList)))
 
         deleteBadWords(toolsList, deleteWordsList, finalToolsList)
 
         print (list(dict.fromkeys(finalToolsList)))
     elif (prompt == "tools"):
-        toolsQuery = input("\nPlease input the tools you would like to search for, separated by a colon and a space (i.e. \"spoon: baking sheet: sieve\")\n")
+        toolsQuery = (input("\nPlease input the tools you would like to search for, separated by a colon and a space (i.e. \"spoon: baking sheet: sieve\")\n")).lower()
         userToolsList = (toolsQuery.split(': '))
 
         aggToolsList = []
 
         finalAggToolsList = []
+
+        finalTitlesList = []
 
         for i in range(len(instructionsList)):
             aggToolsList.append(list(dict.fromkeys(findTools(i, instructionsWordList))))
@@ -156,5 +158,7 @@ while (prompt != "quit"):
 
         for i in range(len(instructionsList)):
             for j in range(len(userToolsList)):
-                if userToolsList[j] in finalAggToolsList[i]:
-                    print (titlesList[i])
+                if all(elem in finalAggToolsList[i] for elem in userToolsList):
+                    finalTitlesList.append(titlesList[i])
+        
+        print (list(dict.fromkeys(finalTitlesList)))
